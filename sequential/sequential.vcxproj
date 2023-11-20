@@ -127,7 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Array.cpp" />
     <ClCompile Include="sequential.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Array.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
