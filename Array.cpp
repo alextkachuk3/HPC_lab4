@@ -19,6 +19,27 @@ Array::Array(const Array& other) : size(other.size)
 	memcpy_s(values, size * sizeof(double), other.values, other.size * sizeof(double));
 }
 
+void Array::serial_std_sort()
+{
+	std::sort(values, values + size);
+}
+
+void Array::serial_bubble_sort()
+{
+	double temp;
+	for (int i = 1; i < size; i++)
+	{
+		for (int j = 0; j < size - i; j++)
+		{
+			if (values[j] > values[j + 1]) {
+				temp = values[j];
+				values[j] = values[j + 1];
+				values[j + 1] = temp;
+			}
+		}
+	}
+}
+
 void Array::random_data_initialization()
 {
 	for (int i = 0; i < size; i++)

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdlib>
+#include <algorithm>
 #include <chrono>
 #include <ostream>
 #include <iomanip>
@@ -12,6 +13,9 @@ public:
 	~Array();
 
 	Array(const Array& other);
+
+	void serial_std_sort();
+	void serial_bubble_sort();
 
 	void random_data_initialization();
 
