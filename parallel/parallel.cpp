@@ -19,11 +19,10 @@ void test_sorting(HPC& hpc, const int& size)
 		std::cout << "Array: " << std::endl << array << std::endl;
 	}
 
-	Array array_copy = array;
-
 	auto start = std::chrono::high_resolution_clock::now();
 
-	hpc;
+	hpc.set_array(array);
+	hpc.parallel_bubble_sort();
 
 	auto finish = std::chrono::high_resolution_clock::now();
 
@@ -36,9 +35,9 @@ void test_sorting(HPC& hpc, const int& size)
 
 	std::cout << "Time of execution parallel sorting: " << std::fixed << std::setprecision(8) << duration << std::setprecision(4) << std::endl << std::endl;
 
-	array_copy.serial_std_sort();
+	array.serial_std_sort();
 
-	if (array == array_copy)
+	if (hpc.get_array() == array)
 	{
 		std::cout << "The results of parallel and sequential standart sorting algorithms are identical!" << std::endl;
 	}
@@ -95,12 +94,12 @@ int main(int argc, char* argv[])
 		{
 			for (int i = 0; i < sizeof(evaluation_sizes) / sizeof(int); i++)
 			{
-				hpc;
+				hpc.parallel_bubble_sort();
 			}
 		}
 		else
 		{
-			hpc;
+			hpc.parallel_bubble_sort();
 		}
 	}
 

@@ -3,8 +3,14 @@
 const double Array::random_data_multiplier = 1000.0;
 const int Array::output_field_width = 10;
 
-Array::Array(const int& size) : size(size)
+Array::Array() : size(0)
 {
+	values = new double[size] {};
+}
+
+Array::Array(const int& size)
+{
+	this->size = size;
 	values = new double[size] {};
 }
 
@@ -13,10 +19,21 @@ Array::~Array()
 	delete[] values;
 }
 
-Array::Array(const Array& other) : size(other.size)
+Array::Array(const Array& other)
 {
+	size = other.size;
 	values = new double[size];
 	memcpy_s(values, size * sizeof(double), other.values, other.size * sizeof(double));
+}
+
+double* Array::get_values() const
+{
+	return values;
+}
+
+int Array::get_size() const
+{
+	return size;
 }
 
 void Array::serial_std_sort()
@@ -70,6 +87,19 @@ bool Array::operator==(const Array& other)
 		}
 		return true;
 	}
+}
+
+Array& Array::operator=(const Array& other)
+{
+	if (this == &other)
+	{
+		return *this;
+	}
+
+	size = other.size;
+	values = new double[size];
+	memcpy_s(values, size * sizeof(double), other.values, other.size * sizeof(double));
+	return *this;
 }
 
 std::ostream& operator<<(std::ostream& out, const Array& array)
