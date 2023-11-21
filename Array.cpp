@@ -53,6 +53,25 @@ double& Array::operator[](const size_t& index) const
 	return values[index];
 }
 
+bool Array::operator==(const Array& other)
+{
+	if (this->size != other.size)
+	{
+		return false;
+	}
+	else
+	{
+		for (int i = 0; i < this->size; i++)
+		{
+			if (this->values[i] != other.values[i])
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+}
+
 std::ostream& operator<<(std::ostream& out, const Array& array)
 {
 	for (int i = 0; i < array.size; i++)

@@ -20,6 +20,7 @@ public:
 	void random_data_initialization();
 
 	double& operator[](const size_t& index) const;
+	bool operator==(const Array& other);
 	friend std::ostream& operator<< (std::ostream& out, const Array& array);
 private:
 	double* values;

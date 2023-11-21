@@ -13,14 +13,14 @@ enum SortType
 	BUBBLE
 };
 
-double test_sorting(Array array, SortType sort_type)
+double test_sorting(Array& array, SortType sort_type)
 {
 	auto start = std::chrono::high_resolution_clock::now();
 
 	switch (sort_type)
 	{
 	case STD:
-		array.serial_std_sort();		
+		array.serial_std_sort();
 		break;
 	case BUBBLE:
 		array.serial_bubble_sort();
@@ -49,13 +49,25 @@ void test_sorting(const int& size)
 		std::cout << "Array: " << std::endl << array << std::endl;
 	}
 
-	double duration = test_sorting(array, SortType::STD);
+	Array array_copy1 = array;
+	Array array_copy2 = array;
 
-	std::cout << "Time of execution serial standart sorting: " << std::fixed << std::setprecision(8) << duration << std::setprecision(4) << std::endl << std::endl;
+	double duration = test_sorting(array_copy1, SortType::STD);
 
-	duration = test_sorting(array, SortType::BUBBLE);
-	
-	std::cout << "Time of execution serial bubble sorting: " << std::fixed << std::setprecision(8) << duration << std::setprecision(4) << std::endl << std::endl;
+	std::cout << "Time of execution sequential standart sorting: " << std::fixed << std::setprecision(8) << duration << std::setprecision(4) << std::endl << std::endl;
+
+	duration = test_sorting(array_copy2, SortType::BUBBLE);
+
+	std::cout << "Time of execution sequential bubble sorting: " << std::fixed << std::setprecision(8) << duration << std::setprecision(4) << std::endl << std::endl;
+
+	if (array_copy1 == array_copy2)
+	{
+		std::cout << "The results of sequential standart and serial bubble sorting algorithms are identical!" << std::endl;
+	}
+	else
+	{
+		std::cout << "The results of sequential standart and serial bubble sorting algorithms are NOT identical!" << std::endl;
+	}
 }
 
 int main(int argc, char* argv[])
@@ -84,7 +96,7 @@ int main(int argc, char* argv[])
 		}
 		return 0;
 	}
-	
+
 	std::cout << "Enter size of matrix:";
 
 	int size;
