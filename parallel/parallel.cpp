@@ -1,3 +1,5 @@
+#pragma comment(linker, "/STACK:200000000")
+
 #include <iostream>
 #include <iomanip>
 #include <chrono>
@@ -19,16 +21,17 @@ void test_sorting(HPC& hpc, const int& size)
 		std::cout << "Array: " << std::endl << array << std::endl;
 	}
 
+	hpc.set_array(array);
+
 	auto start = std::chrono::high_resolution_clock::now();
 
-	hpc.set_array(array);
 	hpc.parallel_bubble_sort();
 
 	auto finish = std::chrono::high_resolution_clock::now();
 
 	if (print_values)
 	{
-		std::cout << "Sorted array: " << std::endl << array;
+		std::cout << "Sorted array: " << std::endl << hpc.get_array();
 	}
 
 	double duration = std::chrono::duration_cast<std::chrono::nanoseconds>(finish - start).count() * 1.0e-9;
@@ -65,7 +68,7 @@ int main(int argc, char* argv[])
 
 	HPC hpc(argc, argv);
 
-	int evaluation_sizes[] = { 10, 100, 10000, 20000, 30000, 40000, 50000 };
+	int evaluation_sizes[] = { 10000, 20000, 30000, 40000, 50000 };
 
 	if (hpc.get_process_rank() == 0)
 	{

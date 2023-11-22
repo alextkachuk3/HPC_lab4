@@ -15,11 +15,12 @@ public:
 
 	Array(const Array& other);
 
-	double* get_values() const;
+	double* get_values();
 	int get_size() const;
 
 	void serial_std_sort();
 	void serial_bubble_sort();
+	static void serial_bubble_sort(double*& values, const int& size);
 
 	void random_data_initialization();
 

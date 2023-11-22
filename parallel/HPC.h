@@ -1,9 +1,17 @@
 #pragma once
-#include <mpi.h>
+#include <cstdlib> 
+#include <cstdio> 
+#include <cstring> 
+#include <ctime> 
+#include <cmath> 
+#include <algorithm> 
+#include <mpi.h> 
 #include <iostream>
 #include <string>
 
 #include "../Array.h"
+
+enum SplitMode { KEEP_FIRST_HALF, KEEP_SECOND_HALF };
 
 class HPC
 {
@@ -14,13 +22,17 @@ public:
 	int get_process_rank() const;
 	int get_process_num() const;
 	
-	Array get_array();
+	Array& get_array();
 	void set_array(const Array& array);
 	void parallel_bubble_sort();
 
 private:
-	int process_num;
-	int process_rank;
+	void array_distribution();
+	void array_collection();
+	void exchange_values(int dual_rank, double* dual_values, int dual_block_size);
+
+	int process_num = 0;
+	int process_rank = -1;
 
 	Array array;
 

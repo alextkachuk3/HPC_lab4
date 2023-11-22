@@ -88,7 +88,7 @@ int main(int argc, char* argv[])
 
 	if (evaluation_test)
 	{
-		int evaluation_sizes[] = { 10, 100, 10000, 20000, 30000, 40000, 50000 };
+		int evaluation_sizes[] = { 100, 10000, 20000, 30000, 40000, 50000 };
 
 		for (int i = 0; i < sizeof(evaluation_sizes) / sizeof(int); i++)
 		{

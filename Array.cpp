@@ -26,7 +26,7 @@ Array::Array(const Array& other)
 	memcpy_s(values, size * sizeof(double), other.values, other.size * sizeof(double));
 }
 
-double* Array::get_values() const
+double* Array::get_values()
 {
 	return values;
 }
@@ -42,6 +42,11 @@ void Array::serial_std_sort()
 }
 
 void Array::serial_bubble_sort()
+{
+	serial_bubble_sort(values, size);
+}
+
+void Array::serial_bubble_sort(double*& values, const int& size)
 {
 	double temp;
 	for (int i = 1; i < size; i++)
