@@ -82,7 +82,7 @@ int main(int argc, char* argv[])
 		}
 		else
 		{
-			std::cout << "Enter size of matrix:";
+			std::cout << "Enter size of array:";
 
 			int size;
 			std::cin >> size;
